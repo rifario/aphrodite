@@ -1,11 +1,19 @@
 import { Box, Stack, Collapse, useMediaQuery } from '@chakra-ui/react'
-import { ReactComponentElement } from 'react'
+import { ReactComponentElement, ReactNode } from 'react'
 
 import MenuItem from './MenuItem'
 
 type MenuLinksProps = {
   isOpen: boolean
-  children: ReactComponentElement<typeof MenuItem>[]
+  children:
+    | ReactComponentElement<typeof MenuItem>[]
+    | ReactComponentElement<typeof MenuItem>
+  breakpoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+}
+
+type ConditionalCollapseProps = {
+  isOpen: boolean
+  children: ReactNode
   breakpoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 }
 
@@ -26,7 +34,11 @@ const getBreakpoint = (bp: 'sm' | 'md' | 'lg' | 'xl' | '2xl') => {
   }
 }
 
-const ConditionalCollapse = ({ children, isOpen, breakpoint }) => {
+const ConditionalCollapse = ({
+  children,
+  isOpen,
+  breakpoint
+}: ConditionalCollapseProps) => {
   const [matches] = useMediaQuery(getBreakpoint(breakpoint))
 
   if (!matches) {
@@ -36,7 +48,7 @@ const ConditionalCollapse = ({ children, isOpen, breakpoint }) => {
       </Collapse>
     )
   }
-  return children
+  return <>{children}</>
 }
 
 export default function MenuLinks({
