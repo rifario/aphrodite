@@ -1,8 +1,11 @@
+import { Text } from '@chakra-ui/react'
+import { Heading } from '@rifario/components'
+
 export default function Home(): JSX.Element {
   return (
     <div>
-      <h1>Hello, world!</h1>
-      <p>Programmed to work and not to feel.</p>
+      <Heading as="h1">Hello, world!</Heading>
+      <Text as="p">Programmed to work and not to feel.</Text>
     </div>
   )
 }

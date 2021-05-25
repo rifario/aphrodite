@@ -1,5 +1,10 @@
 import { AppProps } from 'next/app'
+import { Provider } from '@rifario/components'
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
-  return <Component {...pageProps} />
+  return (
+    <Provider>
+      <Component {...pageProps} />
+    </Provider>
+  )
 }
