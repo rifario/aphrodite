@@ -1,5 +1,5 @@
-import { Flex, LinkProps, useDisclosure } from '@chakra-ui/react'
-import { Children, ReactComponentElement, ReactNode } from 'react'
+import { Flex, FlexProps, LinkProps, useDisclosure } from '@chakra-ui/react'
+import { ReactComponentElement, ReactNode } from 'react'
 
 import MenuItem from './MenuItem'
 import MenuLinks from './MenuLinks'
@@ -27,12 +27,14 @@ type NavbarProps = {
 
 export default function Navbar({
   children,
-  breakpoint
-}: NavbarProps): JSX.Element {
+  breakpoint,
+  ...rest
+}: NavbarProps & FlexProps): JSX.Element {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
     <Flex
+      {...rest}
       as="header"
       align="center"
       justify="space-between"
@@ -43,7 +45,7 @@ export default function Navbar({
     >
       <MenuToggle breakpoint={breakpoint} isOpen={isOpen} toggle={onToggle} />
       <MenuLinks breakpoint={breakpoint} isOpen={isOpen}>
-        {Children.map(children, child => child)}
+        {children}
       </MenuLinks>
     </Flex>
   )
