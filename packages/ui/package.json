@@ -2,7 +2,6 @@
   "name": "@rifario/components",
   "version": "1.0.0",
   "description": "An component package for Rifar.io",
-  "main": "index",
   "author": "Todomir",
   "license": "MIT",
   "scripts": {
