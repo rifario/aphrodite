@@ -1,32 +1,33 @@
-
 {
-    "compilerOptions": {
-        "outDir": "dist",
-        "module": "esnext",
-        "lib": [
-            "dom",
-            "esnext",
-            "dom.iterable"
-        ],
-        "moduleResolution": "node",
-        "jsx": "react-jsx",
-        "sourceMap": true,
-        "declaration": true,
-        "esModuleInterop": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "allowSyntheticDefaultImports": true
-    },
-    "include": [
-        "src"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist"
-    ]
+	"compilerOptions": {
+		"outDir": "dist",
+		"module": "esnext",
+		"lib": [
+			"dom",
+			"esnext",
+			"dom.iterable"
+		],
+		"moduleResolution": "node",
+		"jsx": "react-jsx",
+		"sourceMap": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"include": [
+		"atoms",
+        "molecules",
+        "provider"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	]
 }
