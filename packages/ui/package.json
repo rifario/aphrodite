@@ -2,7 +2,7 @@
   "name": "@rifario/components",
   "version": "1.0.0",
   "description": "An component package for Rifar.io",
-  "main": "src/index",
+  "main": "index",
   "author": "Todomir",
   "license": "MIT",
   "scripts": {
@@ -13,8 +13,7 @@
     "@chakra-ui/react": "^1.6.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@fontsource/inter": "^4.3.0",
-    "@fontsource/raleway": "^4.3.0",
+    "@fontsource/poppins": "^4.4.0",
     "framer-motion": "^4"
   },
   "devDependencies": {
