@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import Link, { LinkProps } from '../Link'
+import Link, { LinkProps } from '../../atoms/Link'
 
 export type MenuItemProps = {
   href: string
