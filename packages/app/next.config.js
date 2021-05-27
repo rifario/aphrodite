@@ -1,8 +1,2 @@
-const withTM = require('next-transpile-modules')(
-  [
-    '@rifario/components/atoms',
-    '@rifario/components/molecules',
-    '@rifario/components/provider'
-  ]
-)
+const withTM = require('next-transpile-modules')(['@rifario/components'])
 module.exports = withTM()
