@@ -11,10 +11,11 @@ type HeadingProps = {
 
 export default function Heading({
   children,
+  fontWeight = 'extrabold',
   ...rest
 }: HeadingProps & CHeadingProps): JSX.Element {
   return (
-    <CHeading letterSpacing="tight" fontWeight="extrabold" {...rest}>
+    <CHeading letterSpacing="tight" fontWeight={fontWeight} {...rest}>
       {children}
     </CHeading>
   )
