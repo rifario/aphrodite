@@ -1,7 +1,5 @@
-import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
-
-import { Link, LinkProps } from '@chakra-ui/react'
+import Link, { LinkProps } from '../Link'
 
 export type MenuItemProps = {
   href: string
@@ -13,15 +11,8 @@ export default function MenuItem({
   children,
   ...rest
 }: MenuItemProps & LinkProps): JSX.Element {
-  const router = useRouter()
-  const prefetch = () => router.prefetch(href)
   return (
-    <Link
-      {...rest}
-      onMouseEnter={prefetch}
-      onFocusCapture={prefetch}
-      href={href}
-    >
+    <Link href={href} {...rest}>
       {children}
     </Link>
   )
