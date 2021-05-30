@@ -13,7 +13,9 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fontsource/poppins": "^4.4.0",
-    "framer-motion": "^4"
+    "framer-motion": "^4",
+    "phosphor-react": "^1.2.1",
+    "react-hook-form": "^7.7.1"
   },
   "devDependencies": {
     "@types/node": "^15.6.1",
