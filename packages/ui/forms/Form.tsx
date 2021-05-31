@@ -29,7 +29,12 @@ export default function Form({
                 key: child.props.name
               }
             })
-          : child
+          : createElement(child.type, {
+              ...{
+                ...child.props,
+                control: methods.control
+              }
+            })
       })}
     </Box>
   )
