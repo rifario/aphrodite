@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/layout'
-import { Children, createElement, ReactElement } from 'react'
-import { useForm } from 'react-hook-form'
+import { chakra, ChakraProps } from '@chakra-ui/react'
+import { createContext, ReactElement, useContext } from 'react'
+import { Control, useForm, UseFormRegister } from 'react-hook-form'
 
 type FormProps = {
   defaultValues?: Record<string, unknown>
@@ -8,34 +8,30 @@ type FormProps = {
   onSubmit: (data: Record<string, unknown>) => void
 }
 
+type FormContextType = {
+  register: UseFormRegister<Record<string, unknown>>
+  control: Control<Record<string, unknown>>
+}
+
+const FormContext = createContext({} as FormContextType)
+
 export default function Form({
   defaultValues = {},
   children,
-  onSubmit
-}: FormProps): JSX.Element {
-  const methods = useForm({ defaultValues })
-  const { handleSubmit } = methods
+  onSubmit,
+  ...rest
+}: FormProps & ChakraProps): JSX.Element {
+  const { handleSubmit, register, control } = useForm({ defaultValues })
 
   return (
-    <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-      {Children.map(children, child => {
-        return child.props.name
-          ? createElement(child.type, {
-              ...{
-                ...child.props,
-                register: methods.register,
-                errors: methods.formState.errors,
-                control: methods.control,
-                key: child.props.name
-              }
-            })
-          : createElement(child.type, {
-              ...{
-                ...child.props,
-                control: methods.control
-              }
-            })
-      })}
-    </Box>
+    <chakra.form {...rest} onSubmit={handleSubmit(onSubmit)}>
+      <FormContext.Provider value={{ register, control }}>
+        {children}
+      </FormContext.Provider>
+    </chakra.form>
   )
+}
+
+export function useFormContext(): FormContextType {
+  return useContext(FormContext)
 }

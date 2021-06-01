@@ -13,18 +13,10 @@ import { useRef, useState } from 'react'
 
 import { Eye, EyeClosed } from 'phosphor-react'
 
-import {
-  Control,
-  DeepMap,
-  FieldError,
-  UseFormRegister,
-  useWatch
-} from 'react-hook-form'
+import { useWatch, useFormState } from 'react-hook-form'
+import { useFormContext } from './Form'
 
 type InputProps = {
-  register?: UseFormRegister<Record<string, unknown>>
-  errors?: DeepMap<Record<string, unknown>, FieldError>
-  control?: Control<Record<string, unknown>>
   name: string
   label?: string
   confirmation?: {
@@ -39,15 +31,15 @@ const capitalize = (string: string) => {
 }
 
 export default function Input({
-  register,
   name,
   label,
   validation,
-  errors,
   confirmation,
-  control,
   ...rest
 }: InputProps & ChakraInputProps): JSX.Element {
+  const { register, control } = useFormContext()
+  const { errors } = useFormState({ control })
+
   const confirmationName = `confirm${capitalize(name)}`
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)

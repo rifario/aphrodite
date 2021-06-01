@@ -1,17 +1,17 @@
 import { Button, ButtonProps } from '@chakra-ui/button'
 import { ReactNode } from 'react'
-import { Control, useFormState } from 'react-hook-form'
+import { useFormState } from 'react-hook-form'
+import { useFormContext } from './Form'
 
 type SubmitFormProps = {
   children: ReactNode
-  control?: Control<Record<string, unknown>>
 }
 
 export default function SubmitForm({
-  control,
   children,
   ...rest
 }: SubmitFormProps & ButtonProps): JSX.Element {
+  const { control } = useFormContext()
   const { isSubmitting } = useFormState({ control })
   return (
     <Button {...rest} type="submit" isLoading={isSubmitting}>
