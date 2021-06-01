@@ -33,5 +33,8 @@ export default function Form({
 }
 
 export function useFormContext(): FormContextType {
-  return useContext(FormContext)
+  const context = useContext(FormContext)
+  if (context === undefined)
+    throw new Error('useFormContext should be used with a FormContext.Provider')
+  return context
 }
