@@ -4,34 +4,41 @@ import {
   FormLabel,
   InputGroup,
   Input as ChakraInput,
-  InputProps as ChakraInputProps
+  InputProps as ChakraInputProps,
+  InputLeftAddon,
+  InputRightAddon,
+  InputLeftElement,
+  InputRightElement
 } from '@chakra-ui/react'
 
 import { useFormState } from 'react-hook-form'
 import { useFormContext } from './Form'
 
-import { createMapFromChildren, renderComponentOfType } from '../utils/forms'
 import { ReactElement } from 'react'
 
 type InputProps = {
-  children: ReactElement | ReactElement[] | null
   name: string
   label?: string
   validation?: Record<string, unknown>
+  rightElement?: ReactElement<typeof InputRightElement>
+  rightAddon?: ReactElement<typeof InputRightAddon>
+  leftElement?: ReactElement<typeof InputLeftElement>
+  leftAddon?: ReactElement<typeof InputLeftAddon>
 }
 
 export default function Input({
   name,
   label,
   validation,
-  children,
   size,
+  rightElement,
+  leftElement,
+  rightAddon,
+  leftAddon,
   ...rest
 }: InputProps & ChakraInputProps): JSX.Element {
   const { register, control } = useFormContext()
   const { errors } = useFormState({ control })
-
-  const COMPONENT_MAP = createMapFromChildren(children)
 
   return (
     <FormControl isInvalid={!!errors?.[name]}>
@@ -48,14 +55,14 @@ export default function Input({
         </FormLabel>
       )}
       <InputGroup size={size}>
-        {renderComponentOfType(COMPONENT_MAP, 'InputLeftAddon')}
-        {renderComponentOfType(COMPONENT_MAP, 'InputLeftElement')}
+        {leftAddon}
+        {leftElement}
         <ChakraInput {...register(name, validation)} {...rest} />
-        {renderComponentOfType(COMPONENT_MAP, 'InputRightAddon')}
-        {renderComponentOfType(COMPONENT_MAP, 'InputRightElement')}
+        {rightAddon}
+        {rightElement}
       </InputGroup>
       <FormErrorMessage>
-        {errors?.[name] && errors?.[name].message}
+        {errors?.[name] && errors?.[name]?.message}
       </FormErrorMessage>
     </FormControl>
   )
