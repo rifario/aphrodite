@@ -1,5 +1,5 @@
 {
-  "name": "rifar.io",
+  "name": "rifario",
   "description": "An raffle manager app",
   "version": "1.0.0",
   "license": "MIT",
@@ -21,6 +21,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "lerna": "^4.0.0",
     "next-transpile-modules": "^7.2.0",
     "prettier": "^2.3.0",
     "typescript": "^4.2.4"
