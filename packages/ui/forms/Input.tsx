@@ -8,13 +8,14 @@ import {
   InputLeftAddon,
   InputRightAddon,
   InputLeftElement,
-  InputRightElement
+  InputRightElement,
+  FormHelperText
 } from '@chakra-ui/react'
 
 import { useFormState } from 'react-hook-form'
 import { useFormContext } from './Form'
 
-import { ReactElement } from 'react'
+import { ReactElement, ReactNode } from 'react'
 
 type InputProps = {
   name: string
@@ -24,6 +25,7 @@ type InputProps = {
   rightAddon?: ReactElement<typeof InputRightAddon>
   leftElement?: ReactElement<typeof InputLeftElement>
   leftAddon?: ReactElement<typeof InputLeftAddon>
+  formHelper?: ReactNode
 }
 
 export default function Input({
@@ -35,6 +37,7 @@ export default function Input({
   leftElement,
   rightAddon,
   leftAddon,
+  formHelper,
   ...rest
 }: InputProps & ChakraInputProps): JSX.Element {
   const { register, control } = useFormContext()
@@ -69,6 +72,7 @@ export default function Input({
         {rightAddon}
         {rightElement}
       </InputGroup>
+      {formHelper && <FormHelperText>{formHelper}</FormHelperText>}
       <FormErrorMessage>
         {errors?.[name] && errors?.[name]?.message}
       </FormErrorMessage>

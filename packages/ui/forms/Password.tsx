@@ -10,9 +10,10 @@ import {
   Icon,
   InputRightAddon,
   InputLeftElement,
-  InputLeftAddon
+  InputLeftAddon,
+  FormHelperText
 } from '@chakra-ui/react'
-import { ReactElement, useRef, useState } from 'react'
+import { ReactElement, ReactNode, useRef, useState } from 'react'
 
 import { Eye, EyeClosed } from 'phosphor-react'
 
@@ -31,6 +32,8 @@ type PasswordProps = {
   rightAddon?: ReactElement<typeof InputRightAddon>
   leftElement?: ReactElement<typeof InputLeftElement>
   leftAddon?: ReactElement<typeof InputLeftAddon>
+  formHelper?: ReactNode
+  confirmationFormHelper?: ReactNode
 }
 
 const capitalize = (string: string) => {
@@ -46,6 +49,8 @@ export default function Password({
   rightAddon,
   leftElement,
   leftAddon,
+  formHelper,
+  confirmationFormHelper,
   ...rest
 }: PasswordProps & ChakraInputProps): JSX.Element {
   const { register, control } = useFormContext()
@@ -120,6 +125,7 @@ export default function Password({
           )}
           {rightAddon}
         </InputGroup>
+        {formHelper && <FormHelperText>{formHelper}</FormHelperText>}
         <FormErrorMessage>
           {errors?.[name] && errors?.[name]?.message}
         </FormErrorMessage>
@@ -151,6 +157,9 @@ export default function Password({
               {...rest}
             />
           </InputGroup>
+          {confirmationFormHelper && (
+            <FormHelperText>{confirmationFormHelper}</FormHelperText>
+          )}
           <FormErrorMessage>
             {errors?.[confirmationName] && errors?.[confirmationName]?.message}
           </FormErrorMessage>
