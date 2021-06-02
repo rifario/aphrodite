@@ -84,7 +84,10 @@ export default function Password({
           {leftAddon}
           <ChakraInput
             variant="filled"
-            size="lg"
+            focusBorderColor="primary.400"
+            py="1.125rem"
+            px="1.5rem"
+            fontSize="md"
             type={show ? 'text' : 'password'}
             {...register(name, validation)}
             {...rest}

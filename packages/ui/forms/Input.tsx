@@ -57,7 +57,15 @@ export default function Input({
       <InputGroup size={size}>
         {leftAddon}
         {leftElement}
-        <ChakraInput {...register(name, validation)} {...rest} />
+        <ChakraInput
+          variant="filled"
+          focusBorderColor="primary.400"
+          py="1.125rem"
+          px="1.5rem"
+          fontSize="md"
+          {...register(name, validation)}
+          {...rest}
+        />
         {rightAddon}
         {rightElement}
       </InputGroup>
