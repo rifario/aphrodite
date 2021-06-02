@@ -1,5 +1,4 @@
-import { Text } from '@chakra-ui/react'
-import { Heading } from '@rifario/components/atoms'
+import { Text, Heading } from '@chakra-ui/react'
 
 export default function Home(): JSX.Element {
   return (
