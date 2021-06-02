@@ -1,5 +1,6 @@
 import { extendTheme, withDefaultColorScheme } from '@chakra-ui/react'
 import { Button } from './button'
+import { Heading } from './heading'
 
 const theme = extendTheme(
   {
@@ -37,7 +38,8 @@ const theme = extendTheme(
       }
     },
     components: {
-      Button
+      Button,
+      Heading
     }
   },
   withDefaultColorScheme({ colorScheme: 'primary' })
