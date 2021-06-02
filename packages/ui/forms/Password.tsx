@@ -7,16 +7,19 @@ import {
   InputProps as ChakraInputProps,
   Button,
   InputRightElement,
-  Icon
+  Icon,
+  InputRightAddon,
+  InputLeftElement,
+  InputLeftAddon
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { ReactElement, useRef, useState } from 'react'
 
 import { Eye, EyeClosed } from 'phosphor-react'
 
 import { useWatch, useFormState } from 'react-hook-form'
 import { useFormContext } from './Form'
 
-type InputProps = {
+type PasswordProps = {
   name: string
   label?: string
   confirmation?: {
@@ -24,19 +27,27 @@ type InputProps = {
     message: string
   }
   validation?: Record<string, unknown>
+  rightElement?: ReactElement<typeof InputRightElement>
+  rightAddon?: ReactElement<typeof InputRightAddon>
+  leftElement?: ReactElement<typeof InputLeftElement>
+  leftAddon?: ReactElement<typeof InputLeftAddon>
 }
 
 const capitalize = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-export default function Input({
+export default function Password({
   name,
   label,
   validation,
   confirmation,
+  rightElement,
+  rightAddon,
+  leftElement,
+  leftAddon,
   ...rest
-}: InputProps & ChakraInputProps): JSX.Element {
+}: PasswordProps & ChakraInputProps): JSX.Element {
   const { register, control } = useFormContext()
   const { errors } = useFormState({ control })
 
@@ -44,7 +55,7 @@ export default function Input({
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)
 
-  const password = useRef({})
+  const password = useRef({} as unknown)
 
   password.current = useWatch({
     control,
@@ -69,6 +80,8 @@ export default function Input({
           </FormLabel>
         )}
         <InputGroup>
+          {leftElement}
+          {leftAddon}
           <ChakraInput
             variant="filled"
             size="lg"
@@ -76,28 +89,31 @@ export default function Input({
             {...register(name, validation)}
             {...rest}
           />
-          <InputRightElement h="full">
-            <Button variant="ghost" onClick={handleClick}>
-              {show ? (
-                <Icon
-                  color={errors?.[name] ? 'red.300' : 'primary.400'}
-                  as={Eye}
-                  w={7}
-                  h={7}
-                />
-              ) : (
-                <Icon
-                  color={errors?.[name] ? 'red.300' : 'gray.400'}
-                  as={EyeClosed}
-                  w={7}
-                  h={7}
-                />
-              )}
-            </Button>
-          </InputRightElement>
+          {rightElement || (
+            <InputRightElement h="full">
+              <Button variant="ghost" onClick={handleClick}>
+                {show ? (
+                  <Icon
+                    color={errors?.[name] ? 'red.300' : 'primary.400'}
+                    as={Eye}
+                    w={7}
+                    h={7}
+                  />
+                ) : (
+                  <Icon
+                    color={errors?.[name] ? 'red.300' : 'gray.400'}
+                    as={EyeClosed}
+                    w={7}
+                    h={7}
+                  />
+                )}
+              </Button>
+            </InputRightElement>
+          )}
+          {rightAddon}
         </InputGroup>
         <FormErrorMessage>
-          {errors?.[name] && errors?.[name].message}
+          {errors?.[name] && errors?.[name]?.message}
         </FormErrorMessage>
       </FormControl>
       {confirmation && (
@@ -128,7 +144,7 @@ export default function Input({
             />
           </InputGroup>
           <FormErrorMessage>
-            {errors?.[confirmationName] && errors?.[confirmationName].message}
+            {errors?.[confirmationName] && errors?.[confirmationName]?.message}
           </FormErrorMessage>
         </FormControl>
       )}
