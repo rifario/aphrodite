@@ -22,9 +22,7 @@
 		"allowSyntheticDefaultImports": true
 	},
 	"include": [
-		"atoms",
-        "molecules",
-        "provider"
+		"/**/*.tsx",
 	],
 	"exclude": [
 		"node_modules",

@@ -4,6 +4,7 @@
   "description": "An component package for Rifar.io",
   "author": "Todomir",
   "license": "MIT",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w"
