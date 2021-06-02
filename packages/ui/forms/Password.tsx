@@ -145,6 +145,8 @@ export default function Password({
           </FormLabel>
 
           <InputGroup>
+            {leftElement}
+            {leftAddon}
             <ChakraInput
               variant="filled"
               size="lg"
@@ -156,6 +158,8 @@ export default function Password({
               })}
               {...rest}
             />
+            {rightElement}
+            {rightAddon}
           </InputGroup>
           {confirmationFormHelper && (
             <FormHelperText>{confirmationFormHelper}</FormHelperText>
