@@ -80,12 +80,14 @@ export default function Login(): JSX.Element {
           </VStack>
           <VStack mb={24} spacing={5}>
             <Input
+              validation={{ required: 'Campo usuário não pode ser vazio' }}
               placeholder="fulano@gmail.com"
               label="Usuário"
               name="username"
               autoComplete="email"
             />
             <Password
+              validation={{ required: 'Campo senha não pode ser vazio' }}
               placeholder="Sua senha"
               label="Senha"
               name="password"
