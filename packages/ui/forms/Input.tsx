@@ -72,10 +72,10 @@ export default function Input({
         {rightAddon}
         {rightElement}
       </InputGroup>
-      {formHelper && <FormHelperText>{formHelper}</FormHelperText>}
       <FormErrorMessage>
         {errors?.[name] && errors?.[name]?.message}
       </FormErrorMessage>
+      {formHelper && <FormHelperText>{formHelper}</FormHelperText>}
     </FormControl>
   )
 }

@@ -125,10 +125,10 @@ export default function Password({
           )}
           {rightAddon}
         </InputGroup>
-        {formHelper && <FormHelperText>{formHelper}</FormHelperText>}
         <FormErrorMessage>
           {errors?.[name] && errors?.[name]?.message}
         </FormErrorMessage>
+        {formHelper && <FormHelperText>{formHelper}</FormHelperText>}
       </FormControl>
       {confirmation && (
         <FormControl isInvalid={!!errors?.[confirmationName]}>
@@ -161,11 +161,11 @@ export default function Password({
             {rightElement}
             {rightAddon}
           </InputGroup>
-          {confirmationFormHelper && (
-            <FormHelperText>{confirmationFormHelper}</FormHelperText>
-          )}
           <FormErrorMessage>
             {errors?.[confirmationName] && errors?.[confirmationName]?.message}
+            {confirmationFormHelper && (
+              <FormHelperText>{confirmationFormHelper}</FormHelperText>
+            )}
           </FormErrorMessage>
         </FormControl>
       )}
