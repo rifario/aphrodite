@@ -94,20 +94,25 @@ export default function Password({
           />
           {rightElement || (
             <InputRightElement h="full">
-              <Button variant="ghost" onClick={handleClick}>
+              <Button
+                borderRadius="md"
+                _hover={{ transform: 'none' }}
+                variant="ghost"
+                onClick={handleClick}
+              >
                 {show ? (
                   <Icon
                     color={errors?.[name] ? 'red.300' : 'primary.400'}
                     as={Eye}
-                    w={7}
-                    h={7}
+                    w={5}
+                    h={5}
                   />
                 ) : (
                   <Icon
                     color={errors?.[name] ? 'red.300' : 'gray.400'}
                     as={EyeClosed}
-                    w={7}
-                    h={7}
+                    w={5}
+                    h={5}
                   />
                 )}
               </Button>
