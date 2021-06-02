@@ -31,7 +31,6 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "framer-motion": "^4",
-    "react-emoji-render": "^1.2.4",
     "react-icons": "^4.2.0"
   }
 }
