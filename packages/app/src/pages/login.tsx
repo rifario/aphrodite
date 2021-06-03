@@ -1,3 +1,4 @@
+import Router from 'next/router'
 import Image from 'next/image'
 import { Box, Flex, Grid, GridItem, Heading, VStack } from '@chakra-ui/react'
 
@@ -15,6 +16,7 @@ export default function Login(): JSX.Element {
       try {
         setTimeout(() => {
           console.log(data)
+          Router.push('/')
           resolve()
         }, 2000)
       } catch (error) {
