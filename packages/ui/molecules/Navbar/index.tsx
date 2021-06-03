@@ -8,11 +8,13 @@ import MenuToggle from './MenuToggle'
 type NavbarProps = {
   children: ReactNode
   breakpoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  homeUrl?: string
 }
 
 export default function Navbar({
   children,
   breakpoint,
+  homeUrl = '/',
   ...rest
 }: NavbarProps & FlexProps): JSX.Element {
   const { isOpen, onToggle } = useDisclosure()
@@ -27,7 +29,7 @@ export default function Navbar({
       w="100%"
       p={8}
     >
-      <Link href="/dashboard" fontWeight="black">
+      <Link href={homeUrl} fontWeight="black">
         Rifar.io
       </Link>
       <MenuToggle breakpoint={breakpoint} isOpen={isOpen} toggle={onToggle} />
