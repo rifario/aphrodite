@@ -23,8 +23,9 @@ export default function DataCard({
       as="article"
     >
       <Flex mb={5} align="center" as="header">
-        <Icon mr={2} w={4} h={4} as={icon} />
+        <Icon w={4} h={4} as={icon} />
         <Heading
+          ml={2}
           letterSpacing="widest"
           textTransform="uppercase"
           fontWeight="regular"
