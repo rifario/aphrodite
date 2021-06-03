@@ -1,5 +1,5 @@
 import { Box, Container, Heading, Stack } from '@chakra-ui/layout'
-import { CurrencyDollar, NoteBlank, Notebook } from 'phosphor-react'
+import { CurrencyDollar, CircleWavyCheck, Clock } from 'phosphor-react'
 
 import { DataCard, OptionCard } from '@rifario/components/molecules'
 
@@ -34,8 +34,12 @@ export default function Dashboard(): JSX.Element {
             label="Faturamento"
             value="R$ 23.000,00"
           />
-          <DataCard icon={NoteBlank} label="Bilhetes vendidos" value="13.302" />
-          <DataCard icon={Notebook} label="Cartelas vendidos" value="7.685" />
+          <DataCard
+            icon={CircleWavyCheck}
+            label="Rifas concluídas"
+            value="13 rifas"
+          />
+          <DataCard icon={Clock} label="Rifas em andamento" value="2 rifas" />
         </Stack>
         <Box as="section">
           <Heading mb={12} size="lg" fontWeight="bold">
