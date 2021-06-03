@@ -1,13 +1,9 @@
 import { Box, Stack, Collapse, useMediaQuery } from '@chakra-ui/react'
-import { ReactComponentElement, ReactNode } from 'react'
-
-import MenuItem from './MenuItem'
+import { ReactNode } from 'react'
 
 type MenuLinksProps = {
   isOpen: boolean
-  children:
-    | ReactComponentElement<typeof MenuItem>[]
-    | ReactComponentElement<typeof MenuItem>
+  children: ReactNode
   breakpoint: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 }
 
