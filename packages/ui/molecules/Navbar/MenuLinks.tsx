@@ -60,12 +60,12 @@ export default function MenuLinks({
     >
       <ConditionalCollapse breakpoint={breakpoint} isOpen={isOpen}>
         <Stack
-          as="ul"
           spacing={8}
+          as="ul"
           align="center"
           justify={{ base: 'center', [breakpoint]: 'flex-end' }}
           direction={{ base: 'column', [breakpoint]: 'row' }}
-          pt={[4, 4, 0, 0]}
+          pt={[4, 0, 0, 0]}
           listStyleType="none"
         >
           {children}

@@ -19,7 +19,7 @@ export default function MenuToggle({
       size="lg"
       onClick={toggle}
       variant="ghost"
-      color="black"
+      colorScheme="whiteAlpha"
     >
       {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
     </Button>
