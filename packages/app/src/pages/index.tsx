@@ -30,16 +30,20 @@ export default function Dashboard(): JSX.Element {
           direction={['column', 'column', 'column', 'row']}
         >
           <DataCard
-            icon={CurrencyDollar}
+            icon={() => <CurrencyDollar weight="bold" />}
             label="Faturamento"
             value="R$ 23.000,00"
           />
           <DataCard
-            icon={CircleWavyCheck}
+            icon={() => <CircleWavyCheck weight="bold" />}
             label="Rifas concluídas"
             value="13 rifas"
           />
-          <DataCard icon={Clock} label="Rifas em andamento" value="2 rifas" />
+          <DataCard
+            icon={() => <Clock weight="bold" />}
+            label="Rifas em andamento"
+            value="2 rifas"
+          />
         </Stack>
         <Box as="section">
           <Heading mb={12} size="lg" fontWeight="bold">
