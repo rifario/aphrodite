@@ -34,7 +34,9 @@ export default function DataCard({
           {label}
         </Heading>
       </Flex>
-      <Heading as="h2">{value}</Heading>
+      <Heading fontWeight="bold" as="h2">
+        {value}
+      </Heading>
     </Box>
   )
 }
