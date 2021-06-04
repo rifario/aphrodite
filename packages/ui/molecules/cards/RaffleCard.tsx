@@ -7,6 +7,7 @@ import {
   Button,
   Box
 } from '@chakra-ui/react'
+import { Sparkles } from '@rifario/components/atoms'
 
 type RaffleCardProps = {
   raffle: {
@@ -51,17 +52,19 @@ export default function RaffleCard({ raffle }: RaffleCardProps): JSX.Element {
         </Heading>
         <Text fontSize="sm">Sorteio {raffle.prizeDrawDate}</Text>
         {raffle.fresh && (
-          <Badge
-            px={8}
-            py={1}
-            bottom={-3}
-            variant="solid"
-            colorScheme="green"
-            borderRadius="3xl"
-            position="absolute"
-          >
-            Novo
-          </Badge>
+          <Box position="absolute" display="inline-block" bottom={-3}>
+            <Sparkles>
+              <Badge
+                px={8}
+                py={1}
+                variant="solid"
+                colorScheme="green"
+                borderRadius="3xl"
+              >
+                Novo
+              </Badge>
+            </Sparkles>
+          </Box>
         )}
       </Flex>
       <Box px={5} as="section">
