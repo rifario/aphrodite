@@ -2,12 +2,17 @@ import { Box, usePrefersReducedMotion } from '@chakra-ui/react'
 import { ReactNode, useState } from 'react'
 import SparkleInstance, { generateSparkle } from './SparklesInstance'
 
-import { range } from '../../utils/functions'
+import { random, range } from '../../utils/functions'
 import { useRandomInterval } from '../../utils/hooks'
 
 type SparkleProps = {
   children: ReactNode
   color?: string
+  amount?: number
+  delay?: {
+    min: number
+    max: number
+  }
 }
 
 const DEFAULT_COLOR = 'hsl(50deg, 100%, 50%)'
@@ -15,17 +20,21 @@ const DEFAULT_COLOR = 'hsl(50deg, 100%, 50%)'
 export default function Sparkles({
   color = DEFAULT_COLOR,
   children,
+  amount = 4,
+  delay = { min: 200, max: 800 },
   ...delegated
 }: SparkleProps): JSX.Element {
   const [sparkles, setSparkles] = useState(() => {
-    return range(2).map(() => generateSparkle(color))
+    return range(amount).map(() => generateSparkle(color))
   })
 
   const prefersReducedMotion = usePrefersReducedMotion()
 
   useRandomInterval(
     () => {
-      const sparkle = generateSparkle(color)
+      const sparkle = generateSparkle(
+        `hsl(${random(50, 60)}deg, ${random(90, 100)}%, ${random(50, 75)}%)`
+      )
       const now = Date.now()
       const nextSparkles = sparkles.filter(sp => {
         const delta = now - sp.createdAt
@@ -34,8 +43,8 @@ export default function Sparkles({
       nextSparkles.push(sparkle)
       setSparkles(nextSparkles)
     },
-    prefersReducedMotion ? null : 500,
-    prefersReducedMotion ? null : 1000
+    prefersReducedMotion ? null : delay.min,
+    prefersReducedMotion ? null : delay.max
   )
 
   return (
