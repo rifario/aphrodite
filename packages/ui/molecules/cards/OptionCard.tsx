@@ -1,5 +1,5 @@
 import { Box, Flex, Button, Heading } from '@chakra-ui/react'
-import { Link } from '../atoms'
+import { Link } from '../../atoms'
 
 type OptionCardProps = {
   title: string
