@@ -10,6 +10,7 @@ import {
 
 type RaffleCardProps = {
   raffle: {
+    id: string
     fresh: boolean
     title: string
     prizeDrawDate: string
@@ -45,21 +46,23 @@ export default function RaffleCard({ raffle }: RaffleCardProps): JSX.Element {
         w="full"
         color="white"
       >
-        <Heading as="h1" size="md">
+        <Heading maxW="20ch" isTruncated as="h1" size="md">
           {raffle.title}
         </Heading>
         <Text fontSize="sm">Sorteio {raffle.prizeDrawDate}</Text>
-        <Badge
-          px={8}
-          py={1}
-          bottom={-3}
-          variant="solid"
-          colorScheme="green"
-          borderRadius="3xl"
-          position="absolute"
-        >
-          Novo
-        </Badge>
+        {raffle.fresh && (
+          <Badge
+            px={8}
+            py={1}
+            bottom={-3}
+            variant="solid"
+            colorScheme="green"
+            borderRadius="3xl"
+            position="absolute"
+          >
+            Novo
+          </Badge>
+        )}
       </Flex>
       <Box px={5} as="section">
         <Flex textAlign="center" justify="space-between" as="data">
