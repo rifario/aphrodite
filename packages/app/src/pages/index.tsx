@@ -1,7 +1,7 @@
 import { Box, Container, Heading, Stack } from '@chakra-ui/layout'
 import { CurrencyDollar, CircleWavyCheck, Clock } from 'phosphor-react'
 
-import { DataCard, OptionCard } from '@rifario/components/molecules'
+import { DataCard, OptionCard } from '@rifario/components/molecules/cards'
 
 export default function Dashboard(): JSX.Element {
   return (
@@ -63,7 +63,7 @@ export default function Dashboard(): JSX.Element {
             <OptionCard
               title="Gerenciar Rifas"
               description="Gerenciar as rifas que você criou"
-              href="#"
+              href="/raffles"
             />
             <OptionCard
               title="Criar Nova Rifa"
