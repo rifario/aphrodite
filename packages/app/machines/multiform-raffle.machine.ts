@@ -1,69 +1,71 @@
-import { createMachine, assign } from 'xstate'
+import { assign, interpret, Machine } from 'xstate'
 
-type Raffle = {
+export type RaffleType = {
   name: string
   prizeDrawDate: string
-  tickets?: {
-    amount: number
-    value: string
-  }
-  cards?: {
-    amount: number
-    value: string
-  }
-  prizes: [{ name: string; amount: number }]
+  ticketsAmount: number
+  ticketsValue: string
+  chartAmount: number
+  chartValue: string
+  prizes: { name: string; amount: number }[]
 }
 
-type RaffleContext = {
-  raffle: Partial<Raffle> | Raffle | null
-}
+type RaffleContext = Partial<RaffleType> | RaffleType
 
-type RaffleEvent =
-  | { type: 'RAFFLE' }
-  | { type: 'PRIZES' }
-  | { type: 'CHECKOUT' }
-  | { type: 'NEXT'; data: Partial<Raffle> }
-  | { type: 'PREV' }
-  | { type: 'COMPLETE'; data: Raffle }
+// type RaffleEvent =
+//   | {
+//       type: 'NEXT'
+//       data: Partial<RaffleType> | RaffleType
+//     }
+//   | {
+//       type: 'PREV'
+//     }
 
-const machine = createMachine<RaffleContext, RaffleEvent>({
-  id: '@rifario/forms/new-raffle',
-  initial: 'init',
-  context: {
-    raffle: null
-  },
-  states: {
-    init: {
-      on: {
-        RAFFLE: 'raffle',
-        PRIZES: 'prizes',
-        CHECKOUT: 'checkout'
-      }
-    },
-    raffle: {
-      on: {
-        NEXT: {
-          target: 'prizes',
-          actions: assign({
-            raffle: (_, event) => event.data
-          })
+const machine = Machine<RaffleContext>(
+  {
+    id: '@rifario/forms/new-raffle',
+    initial: 'raffle',
+    context: {},
+    states: {
+      raffle: {
+        on: {
+          PREV: {
+            actions: ['callback']
+          },
+          NEXT: {
+            target: 'prizes',
+            actions: ['updateContext']
+          }
         }
+      },
+      prizes: {
+        on: {
+          PREV: 'raffle',
+          NEXT: {
+            target: 'confirm',
+            actions: ['updateContext']
+          }
+        }
+      },
+      confirm: {
+        on: {
+          PREV: 'prizes',
+          NEXT: 'complete'
+        }
+      },
+      complete: {
+        type: 'final'
       }
-    },
-    prizes: {
-      on: {
-        PREV: 'raffle',
-        NEXT: 'checkout'
-      }
-    },
-    checkout: {
-      on: {
-        PREV: 'raffle',
-        COMPLETE: 'complete'
-      }
-    },
-    complete: { type: 'final' }
+    }
+  },
+  {
+    actions: {
+      updateContext: assign((_ctx, e) => {
+        return e.data
+      }),
+      callback: (_ctx, e) => e.cb()
+    }
   }
-})
+)
 
-export default machine
+export default interpret(machine, { devTools: true }).start()
