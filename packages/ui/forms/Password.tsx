@@ -43,6 +43,7 @@ const capitalize = (string: string) => {
 export default function Password({
   name,
   label,
+  size = 'lg',
   validation,
   confirmation,
   rightElement,
@@ -84,7 +85,7 @@ export default function Password({
             {label}
           </FormLabel>
         )}
-        <InputGroup>
+        <InputGroup size={size}>
           {leftElement}
           {leftAddon}
           <ChakraInput
