@@ -10,22 +10,27 @@ export type RaffleType = {
   prizes: { name: string; amount: number }[]
 }
 
-type RaffleContext = Partial<RaffleType> | RaffleType
-
-// type RaffleEvent =
-//   | {
-//       type: 'NEXT'
-//       data: Partial<RaffleType> | RaffleType
-//     }
-//   | {
-//       type: 'PREV'
-//     }
+type RaffleContext = {
+  raffle: Partial<RaffleType> | RaffleType | null
+  feedback: {
+    raffle: boolean
+    prizes: boolean
+    confirm: boolean
+  }
+}
 
 const machine = Machine<RaffleContext>(
   {
     id: '@rifario/forms/new-raffle',
     initial: 'raffle',
-    context: {},
+    context: {
+      raffle: null,
+      feedback: {
+        raffle: false,
+        prizes: false,
+        confirm: false
+      }
+    },
     states: {
       raffle: {
         on: {
@@ -50,7 +55,7 @@ const machine = Machine<RaffleContext>(
       confirm: {
         on: {
           PREV: 'prizes',
-          NEXT: 'complete'
+          NEXT: { target: 'complete', actions: ['updateFeedback'] }
         }
       },
       complete: {
@@ -60,8 +65,18 @@ const machine = Machine<RaffleContext>(
   },
   {
     actions: {
-      updateContext: assign((_ctx, e) => {
-        return e.data
+      updateContext: assign((ctx, e) => {
+        return {
+          ...ctx,
+          raffle: { ...ctx.raffle, ...e.data },
+          feedback: { ...ctx.feedback, ...e.feedback }
+        }
+      }),
+      updateFeedback: assign((ctx, e) => {
+        return {
+          ...ctx,
+          feedback: { ...ctx.feedback, ...e.feedback }
+        }
       }),
       callback: (_ctx, e) => e.cb()
     }

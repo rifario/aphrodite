@@ -33,14 +33,17 @@ export default function CreateNewRaffle(): JSX.Element {
       <MultiFormIndicator my={10}>
         <MultiFormIndicator.Item
           current={current.matches('raffle')}
+          valid={current.context?.feedback.raffle}
           label="Dados da rifa"
         />
         <MultiFormIndicator.Item
           current={current.matches('prizes')}
+          valid={current.context?.feedback.prizes}
           label="Recompensas"
         />
         <MultiFormIndicator.Item
           current={current.matches('confirm')}
+          valid={current.context?.feedback.confirm}
           label="Confirmação"
         />
       </MultiFormIndicator>

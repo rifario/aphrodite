@@ -22,7 +22,9 @@ export default function CreatePrizeData(): JSX.Element {
   const [current, send] = useService(MultiformRaffleService)
 
   const createDefaultValues = () => {
-    const defaultValues = current.context?.prizes || [{ name: '', amount: 0 }]
+    const defaultValues = current.context.raffle.prizes || [
+      { name: '', amount: 0 }
+    ]
 
     return defaultValues
   }
@@ -40,6 +42,9 @@ export default function CreatePrizeData(): JSX.Element {
       type: 'NEXT',
       data: {
         prizes: [...data.prizes]
+      },
+      feedback: {
+        prizes: true
       }
     })
   }

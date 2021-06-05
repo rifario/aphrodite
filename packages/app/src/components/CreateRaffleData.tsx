@@ -10,11 +10,11 @@ export default function CreateRaffleData(): JSX.Element {
   const [current, send] = useService(MultiformRaffleService)
 
   const onSubmit = data => {
-    send({ type: 'NEXT', data })
+    send({ type: 'NEXT', data, feedback: { raffle: true } })
   }
 
   return (
-    <Form defaultValues={current.context} onSubmit={onSubmit}>
+    <Form defaultValues={current.context.raffle} onSubmit={onSubmit}>
       <Grid mb={[24, 24, 48]} gap={6} templateRows="1fr 1fr 1fr">
         <GridItem
           as="fieldset"
