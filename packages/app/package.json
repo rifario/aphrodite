@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@rifario/components": "1.0.0",
+    "@xstate/inspect": "^0.4.1",
     "@xstate/react": "^1.3.4",
     "next": "10.2.3",
     "react": "17.0.2",
