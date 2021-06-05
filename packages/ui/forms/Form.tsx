@@ -1,11 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { chakra, ChakraProps } from '@chakra-ui/react'
 import { createContext, ReactElement, useContext } from 'react'
-import { Control, useForm, UseFormRegister } from 'react-hook-form'
+import {
+  Control,
+  useForm,
+  UseFormHandleSubmit,
+  UseFormRegister
+} from 'react-hook-form'
 
 type FormProps = {
-  defaultValues?: Record<string, unknown>
+  defaultValues?: any
   children: ReactElement | ReactElement[]
   onSubmit: (data: Record<string, unknown>) => void
+  config?: {
+    handleSubmit: UseFormHandleSubmit<any>
+    register: UseFormRegister<any>
+    control: Control<any>
+  }
 }
 
 type FormContextType = {
@@ -19,15 +30,19 @@ export default function Form({
   defaultValues = {},
   children,
   onSubmit,
+  config,
   ...rest
 }: FormProps & ChakraProps): JSX.Element {
   const { handleSubmit, register, control } = useForm({ defaultValues })
 
+  const submit = config ? config.handleSubmit : handleSubmit
+  const state = config
+    ? { register: config.register, control: config.control }
+    : { register, control }
+
   return (
-    <chakra.form {...rest} onSubmit={handleSubmit(onSubmit)}>
-      <FormContext.Provider value={{ register, control }}>
-        {children}
-      </FormContext.Provider>
+    <chakra.form {...rest} onSubmit={submit(onSubmit)}>
+      <FormContext.Provider value={state}>{children}</FormContext.Provider>
     </chakra.form>
   )
 }
