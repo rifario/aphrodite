@@ -12,10 +12,13 @@ import {
   FormHelperText
 } from '@chakra-ui/react'
 
+import MaskedInput from 'react-text-mask'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+
 import { useFormState } from 'react-hook-form'
 import { useFormContext } from './Form'
 
-import { ReactElement, ReactNode } from 'react'
+import { cloneElement, ReactElement, ReactNode } from 'react'
 
 type InputProps = {
   name: string
@@ -26,13 +29,15 @@ type InputProps = {
   leftElement?: ReactElement<typeof InputLeftElement>
   leftAddon?: ReactElement<typeof InputLeftAddon>
   formHelper?: ReactNode
+  mask?: 'phone' | 'currency'
 }
 
 export default function Input({
   name,
   label,
   validation,
-  size,
+  mask,
+  size = 'lg',
   rightElement,
   leftElement,
   rightAddon,
@@ -42,6 +47,20 @@ export default function Input({
 }: InputProps & ChakraInputProps): JSX.Element {
   const { register, control } = useFormContext()
   const { errors } = useFormState({ control })
+
+  const MASK_MAP = {
+    currency: createNumberMask({
+      prefix: 'R$',
+      suffix: '',
+      includeThousandsSeparator: true,
+      thousandsSeparatorSymbol: '.',
+      allowDecimal: true,
+      decimalSymbol: ',',
+      decimalLimit: 2,
+      allowNegative: false,
+      allowLeadingZeroes: false
+    })
+  }
 
   return (
     <FormControl isInvalid={!!errors?.[name]}>
@@ -60,15 +79,18 @@ export default function Input({
       <InputGroup size={size}>
         {leftAddon}
         {leftElement}
-        <ChakraInput
-          variant="filled"
-          focusBorderColor="primary.400"
-          py="1.125rem"
-          px="1.5rem"
-          fontSize="md"
-          {...register(name, validation)}
-          {...rest}
-        />
+        {cloneElement(
+          <ChakraInput
+            variant="filled"
+            focusBorderColor="primary.400"
+            py="1.125rem"
+            px="1.5rem"
+            fontSize="md"
+            {...register(name, validation)}
+            {...rest}
+          />,
+          mask && { as: MaskedInput, mask: MASK_MAP[mask] }
+        )}
         {rightAddon}
         {rightElement}
       </InputGroup>
