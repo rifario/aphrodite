@@ -7,11 +7,13 @@ type MultiFormIndicatorItemProps = {
   step?: number
   label: string
   current?: boolean
+  valid?: boolean
 }
 
 const MultiFormIndicatorItem = ({
   step,
   label,
+  valid,
   current
 }: MultiFormIndicatorItemProps) => {
   const circleSize = useBreakpointValue([5, 6, 8])
@@ -20,6 +22,7 @@ const MultiFormIndicatorItem = ({
     <ListItem aria-labelledby={label} display="inline-block">
       <Circle
         data-current={current || undefined}
+        data-valid={valid || undefined}
         position="relative"
         w={circleSize}
         h={circleSize}
@@ -33,6 +36,12 @@ const MultiFormIndicatorItem = ({
           '&[data-current]': {
             transform: 'scale(1.1)',
             boxShadow: '0 0 1px 2px rgba(89, 0, 255, 0.4)'
+          },
+          '&[data-valid]': {
+            bg: 'green.300',
+            '&[data-current]': {
+              boxShadow: '0 0 1px 2px rgba(0, 255, 98, 0.4)'
+            }
           }
         }}
       >
