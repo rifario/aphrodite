@@ -1,5 +1,6 @@
 import { Box, Container, Heading, Stack } from '@chakra-ui/layout'
-import { CurrencyDollar, CircleWavyCheck, Clock } from 'phosphor-react'
+
+import { FiDollarSign, FiCheckCircle, FiClock } from 'react-icons/fi'
 
 import { DataCard, OptionCard } from '@rifario/components/molecules/cards'
 
@@ -30,20 +31,16 @@ export default function Dashboard(): JSX.Element {
           direction={['column', 'column', 'column', 'row']}
         >
           <DataCard
-            icon={() => <CurrencyDollar weight="bold" />}
+            icon={FiDollarSign}
             label="Faturamento"
             value="R$ 23.000,00"
           />
           <DataCard
-            icon={() => <CircleWavyCheck weight="bold" />}
+            icon={FiCheckCircle}
             label="Rifas concluídas"
             value="13 rifas"
           />
-          <DataCard
-            icon={() => <Clock weight="bold" />}
-            label="Rifas em andamento"
-            value="2 rifas"
-          />
+          <DataCard icon={FiClock} label="Rifas em andamento" value="2 rifas" />
         </Stack>
         <Box as="section">
           <Heading mb={12} size="lg" fontWeight="bold">
