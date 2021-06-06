@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { ReactElement, ReactNode, useRef, useState } from 'react'
 
-import { Eye, EyeClosed } from 'phosphor-react'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 
 import { useWatch, useFormState } from 'react-hook-form'
 import { useFormContext } from './Form'
@@ -109,14 +109,14 @@ export default function Password({
                 {show ? (
                   <Icon
                     color={errors?.[name] ? 'red.300' : 'primary.400'}
-                    as={Eye}
+                    as={AiOutlineEye}
                     w={5}
                     h={5}
                   />
                 ) : (
                   <Icon
                     color={errors?.[name] ? 'red.300' : 'gray.400'}
-                    as={EyeClosed}
+                    as={AiOutlineEyeInvisible}
                     w={5}
                     h={5}
                   />
