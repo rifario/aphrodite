@@ -83,4 +83,4 @@ const machine = Machine<RaffleContext>(
   }
 )
 
-export default interpret(machine, { devTools: true }).start()
+export default interpret(machine).start()
